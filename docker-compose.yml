@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  kings-communication:
+    image: kambang/kingscorp:communication
+    container_name: kings-communication
+    build:
+      context: ./
+      dockerfile: ./Dockerfile
+    ports:
+      - 3004:3000
+    volumes:
+      - ./:/usr/src/app
+    env_file: ./.env
+    command: npm run start:dev
+    restart: always
+  
+  peer:
+    image: peerjs/peerjs-server:latest
+    container_name: peer-server
+    restart: always
